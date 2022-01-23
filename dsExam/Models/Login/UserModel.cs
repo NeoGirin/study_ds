@@ -1,4 +1,5 @@
 ﻿using MySqlConnector;
+using MyWeb.Lib.DataBase;
 using System;
 
 namespace dsExam.Models.Login
@@ -35,11 +36,9 @@ SELECT
 ,   @email
 ,   @password
 ";
-            using (var conn = new MySqlConnection("Server=127.0.0.1;Port=3306;Database=myweb;Uid=root;Pwd=123;"))
+            using (var db = new MySqlDapperHelper())
             {
-                conn.Open();
-
-                return Dapper.SqlMapper.Execute(conn, sql, this);
+                return db.Execute(sql, this);
             }
         }
 
@@ -57,12 +56,9 @@ WHERE
     user_name = @user_name
 ";
             UserModel user;
-
-            using (var conn = new MySqlConnection("Server=127.0.0.1;Port=3306;Database=myweb;Uid=root;Pwd=123;"))
+            using (var db = new MySqlDapperHelper())
             {
-                conn.Open();
-
-                user = Dapper.SqlMapper.QuerySingleOrDefault<UserModel>(conn, sql, this);
+                user = db.QuerySingle<UserModel>(sql, this);
             }
 
             if(user == null)

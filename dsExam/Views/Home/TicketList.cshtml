@@ -1,9 +1,9 @@
-﻿@{ 
-    var dt = ViewData["dt"] as System.Data.DataTable;
+﻿@model List<TicketModel>
+@*
+    @{ var dt = ViewData["dt"] as System.Data.DataTable;
 
-    var ticketList = ViewData["ticketList"] as List<TicketModel>;
-}
-
+    var ticketList = ViewData["ticketList"] as List<TicketModel>; }
+*@
 <!-- basic table -->
 <div class="row">
     <div class="col-12">
@@ -62,51 +62,68 @@
                             </tr>
                         </thead>
                         <!--
-    <tbody>
-        @foreach (System.Data.DataRow row in dt.Rows)
-        {
-            <tr>
-                <td>@row["status"]</td>
-                <td>@row["title"]</td>
-                <td>@row["ticket_id"]</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        }
-    </tbody>
-        -->
-                    <tbody>
-                        @foreach (var ticket in ticketList)
-                        {
-                        <tr>
-                            <td>@ticket.Status</td>
-                            <td>@ticket.Title</td>
-                            <td>@ticket.Ticket_id</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                            @*
+                            <tbody>
+                                @foreach (System.Data.DataRow row in dt.Rows)
+                                {
+                                    <tr>
+                                        <td>@row["status"]</td>
+                                        <td>@row["title"]</td>
+                                        <td>@row["ticket_id"]</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                            <tbody>
+                                @foreach (var ticket in ticketList)
+                                {
+                                    <tr>
+                                        <td>@ticket.Status</td>
+                                        <td>@ticket.Title</td>
+                                        <td>@ticket.Ticket_id</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        *@
+                                -->
+                        <tbody>
+                            @foreach (var ticket in Model)
+                            {
+                <tr>
+                    <td>@ticket.Status</td>
+                    <td>@ticket.Title</td>
+                    <td>@ticket.Ticket_id</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
 }
-                    </tbody>
+                        </tbody>
                     </table>
                     <!--
-    <ul class="pagination float-right">
-        <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Previous</a>
-        </li>
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item">
-            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-        </li>
-    </ul>
-        -->
+                    <ul class="pagination float-right">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">Previous</a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                        -->
                 </div>
             </div>
         </div>
@@ -116,7 +133,7 @@
 <div>
     <form id="form1" method="post" action="/home/ticketchange">
         <input name="ticket_id" type="text" value="1" />
-        <input name="title" type="text" value="변경값" />
+        <input name="title" type="text" placeholder="변경값" />
 
         <button type="submit" class="btn btn-sm btn-primary">변경 전송</button>
     </form>
